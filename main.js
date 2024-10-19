@@ -25,16 +25,34 @@ liff
       <div id="airtable-data"></div>
     `;
 
-    // Airtable API 請求，讀取或更新 Airtable 資料
     const apiKey = 'pathKg8vFtCZFQo59.a03c24ccd56fea312a07bfdd8ea5c958b4a5cc02e3e0d622345076ec54e522a3';
     const baseId = 'appmVhpvlM12J2ySD';
     const tableName = 'tblsBuEtURTFMZrJm'; 
 
-    // 發送請求到 Airtable API 並顯示在網頁上
+    // 發送POST請求到 Airtable，將 userId 保存到 Airtable 中
     fetch(`https://api.airtable.com/v0/${baseId}/${tableName}`, {
+      method: 'POST',
       headers: {
         Authorization: `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
       },
+      body: JSON.stringify({
+        fields: {
+          name: displayName,
+          lineUserId: userId,
+          information: "hello, world",
+        }
+      }),
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Airtable record created:', data);
+      // POST 完成後再發送 GET 請求以取得所有資料
+      return fetch(`https://api.airtable.com/v0/${baseId}/${tableName}`, {
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+        },
+      });
     })
     .then(response => response.json())
     .then(data => {
@@ -50,8 +68,8 @@ liff
       document.getElementById('airtable-data').innerHTML = airtableHTML;
     })
     .catch(error => {
-      console.error('Error fetching data from Airtable:', error);
-      document.getElementById('airtable-data').innerHTML = `<p>Error fetching data from Airtable: ${error}</p>`;
+      console.error('Error:', error);
+      document.getElementById('airtable-data').innerHTML = `<p>Error: ${error}</p>`;
     });
 
   })
