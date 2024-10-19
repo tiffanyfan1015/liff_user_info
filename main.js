@@ -64,8 +64,8 @@ liff
               fields: {
                 lineUserId: userId,
                 name: displayName,
-                height: `${height} cm`,
-                weight: `${weight} kg`,
+                height: height,
+                weight: weight,
                 hobbies: hobbies,
               }
             }
