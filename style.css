@@ -1,4 +1,3 @@
-/* 全局樣式 */
 body {
   font-family: 'Arial', sans-serif;
   background-color: #2C2F33;
@@ -11,7 +10,6 @@ body {
   min-height: 100vh;
 }
 
-/* 頁面容器 */
 #app {
   max-width: 400px;
   width: 100%;
@@ -20,7 +18,6 @@ body {
   text-align: center;
 }
 
-/* 頭像和頭像樣式 */
 #profile-picture {
   width: 120px;
   height: 120px;
@@ -29,7 +26,6 @@ body {
   display: block;
 }
 
-/* 名稱和帳號 */
 h1 {
   color: white;
   font-size: 1.5em;
@@ -41,9 +37,8 @@ h1 {
   margin-bottom: 20px;
 }
 
-/* 卡片風格的表單元素 */
 label {
-  color: #bbb;
+  color: #0D3B66;
   text-align: left;
   font-size: 0.9em;
   margin-bottom: 5px;
@@ -52,12 +47,12 @@ label {
 
 input[type="text"],
 select {
-  width: 90%;  /* 限制輸入框寬度，保持在卡片內 */
-  padding: 5px; /* 減少內邊距 */
-  margin-bottom: 5px; /* 減少元素之間的間距 */
+  width: 90%;  
+  padding: 5px;
+  margin-bottom: 5px; 
   border: none;
-  border-radius: 10px; /* 減少圓角的弧度 */
-  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1); /* 輕微陰影效果 */
+  border-radius: 10px; 
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
   font-size: 1em;
   box-sizing: border-box;
 }
@@ -68,15 +63,14 @@ select:focus {
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
-/* 卡片風格的按鈕 */
 button {
-  width: 90%; /* 和輸入框保持一致 */
-  padding: 12px; /* 減少按鈕的內邊距，讓按鈕更小 */
+  width: 90%; 
+  padding: 12px;
   background-color: #7289DA;
   color: white;
-  font-size: 1em; /* 字體調小一點 */
+  font-size: 1em;
   border: none;
-  border-radius: 20px; /* 保持圓角，但不太過誇張 */
+  border-radius: 20px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
@@ -85,19 +79,18 @@ button:hover {
   background-color: #5A6FB1;
 }
 
-/* 卡片風格 */
 .card {
   background-color: white;
   color: #333;
-  border-radius: 15px; /* 減少卡片的圓角 */
-  padding: 10px; /* 減少卡片內邊距 */
-  margin-bottom: 10px; /* 減少卡片之間的距離 */
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* 微妙陰影效果 */
+  border-radius: 15px; 
+  padding: 10px; 
+  margin-bottom: 10px; 
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease;
 }
 
 .card:hover {
-  transform: translateY(-3px); /* 減少移動距離 */
+  transform: translateY(-3px); /
 }
 
 #airtable-data {

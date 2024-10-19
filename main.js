@@ -18,7 +18,7 @@ liff
     const baseId = 'appmVhpvlM12J2ySD';
     const tableName = 'tblsBuEtURTFMZrJm'; 
 
-    // 檢查是否已有資料
+    // check if data exist
     fetch(`https://api.airtable.com/v0/${baseId}/${tableName}?filterByFormula={lineUserId}='${userId}'`, {
       headers: {
         Authorization: `Bearer ${apiKey}`
@@ -31,7 +31,6 @@ liff
         const userData = records[0].fields.personalInformation;
         const parsedData = JSON.parse(userData);
 
-        // 將現有資料填入輸入框
         document.getElementById('user_name').value = parsedData.user_name || displayName;
         document.getElementById('height').value = parsedData.height || '';
         document.getElementById('weight').value = parsedData.weight || '';
@@ -40,7 +39,6 @@ liff
         document.getElementById('goal').value = parsedData.goal || '';
         document.getElementById('others').value = parsedData.others || '';
       } else {
-        // 沒有現有記錄，使用者必須第一次輸入資料
         document.getElementById('user_name').value = displayName;
       }
     })
