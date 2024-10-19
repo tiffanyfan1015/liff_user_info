@@ -1,77 +1,108 @@
 /* 全局樣式 */
 body {
   font-family: 'Arial', sans-serif;
-  background-color: #f0f0f0;
+  background-color: #2C2F33;
+  color: white;
   margin: 0;
   padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
 }
 
+/* 頁面容器 */
 #app {
-  max-width: 600px;
-  margin: 50px auto;
+  max-width: 400px;
+  width: 100%;
+  background-color: #2C2F33;
   padding: 20px;
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
 }
 
+/* 頭像和頭像樣式 */
+#profile-picture {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin: 0 auto 10px;
+  display: block;
+}
+
+/* 名稱和帳號 */
 h1 {
-  text-align: center;
-  color: #333;
+  color: white;
+  font-size: 1.5em;
+}
+
+#display-name {
+  color: white;
+  font-size: 1.2em;
   margin-bottom: 20px;
 }
 
+/* 卡片風格的表單元素 */
 label {
-  display: block;
-  font-size: 14px;
-  color: #555;
+  color: #bbb;
+  text-align: left;
+  font-size: 0.9em;
   margin-bottom: 5px;
+  display: block;
 }
 
 input[type="text"],
 select {
   width: 100%;
-  padding: 10px;
-  margin-bottom: 20px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  font-size: 16px;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  font-size: 1em;
 }
 
-input[type="text"]::placeholder {
-  color: #999;
+input[type="text"]:focus,
+select:focus {
+  outline: none;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.7);
 }
 
+/* 卡片風格的按鈕 */
 button {
-  display: block;
   width: 100%;
   padding: 15px;
-  background-color: #007BFF;
+  background-color: #7289DA;
   color: white;
-  font-size: 18px;
+  font-size: 1.2em;
   border: none;
-  border-radius: 5px;
+  border-radius: 30px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 button:hover {
-  background-color: #0056b3;
+  background-color: #5A6FB1;
+}
+
+/* 卡片風格 */
+.card {
+  background-color: white;
+  color: #333;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
 }
 
 #airtable-data {
   margin-top: 20px;
   padding: 10px;
-  background-color: #f9f9f9;
-  border-left: 4px solid #007BFF;
-  border-radius: 5px;
-  font-size: 14px;
-  color: #333;
-}
-
-img {
-  display: block;
-  margin: 0 auto;
-  border-radius: 50%;
-  margin-bottom: 20px;
+  background-color: #23272A;
+  border-radius: 12px;
+  color: white;
 }

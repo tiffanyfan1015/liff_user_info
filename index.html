@@ -9,50 +9,52 @@
   </head>
   <body>
     <div id="app">
-      <h1>建立個人資料吧</h1>
-      <!-- <p id="liff-status">LIFF initializing...</p> -->
-      <!-- <p id="user-id"></p> -->
-      <p id="display-name"></p>
-      <img id="profile-picture" style="width: 100px; height: 100px; border-radius: 50%;" alt="Profile Picture">
-      <!-- <a href="https://developers.line.biz/ja/docs/liff/" target="_blank" rel="noreferrer">
-        LIFF Documentation
-      </a> -->
-      <br>
+      <img id="profile-picture" alt="Profile Picture">
+      <h1 id="display-name"></h1>
 
-      <!-- 表單讓使用者輸入資料 -->
-      <!-- <h2>填寫資料：</h2> -->
-      <label for="user_name">稱呼:</label><br>
-      <input type="text" id="user_name" name="user_name"><br><br>
+      <!-- 卡片設計的表單 -->
+      <div class="card">
+        <label for="user_name">稱呼:</label>
+        <input type="text" id="user_name" name="user_name" placeholder="輸入您的稱呼">
+      </div>
 
-      <label for="height">身高 (cm):</label><br>
-      <input type="text" id="height" name="height"><br><br>
+      <div class="card">
+        <label for="height">身高 (cm):</label>
+        <input type="text" id="height" name="height" placeholder="輸入您的身高">
+      </div>
 
-      <label for="weight">體重 (kg):</label><br>
-      <input type="text" id="weight" name="weight"><br><br>
+      <div class="card">
+        <label for="weight">體重 (kg):</label>
+        <input type="text" id="weight" name="weight" placeholder="輸入您的體重">
+      </div>
 
-      <lable for="intake">食量:</lable>
-      <br>
-      <select id="intake" name="intake" onchange="">
-        <option value="小">小</option>
-        <option value="中">中</option>
-        <option value="大">大</option>
-      </select>
-      <br><br>
+      <div class="card">
+        <label for="intake">食量:</label>
+        <select id="intake" name="intake">
+          <option value="小">小</option>
+          <option value="中">中</option>
+          <option value="大">大</option>
+        </select>
+      </div>
 
-      <lable for="vegan">葷素:</lable>
-      <br>
-      <select id="vegan" name="vegan" onchange="">
-        <option value="葷食">葷食</option>
-        <option value="蛋奶素">蛋奶素</option>
-        <option value="全素">全素</option>
-      </select>
-      <br><br>
+      <div class="card">
+        <label for="vegan">葷素:</label>
+        <select id="vegan" name="vegan">
+          <option value="葷食">葷食</option>
+          <option value="蛋奶素">蛋奶素</option>
+          <option value="全素">全素</option>
+        </select>
+      </div>
 
-      <label for="goal">飲食目標:</label><br>
-      <input type="text" id="goal" name="goal"><br><br>
+      <div class="card">
+        <label for="goal">目標:</label>
+        <input type="text" id="goal" name="goal" placeholder="輸入您的目標">
+      </div>
 
-      <label for="others">其他個人資訊:</label><br>
-      <input type="text" id="others" name="others"><br><br>
+      <div class="card">
+        <label for="others">其他:</label>
+        <input type="text" id="others" name="others" placeholder="輸入其他資訊">
+      </div>
 
       <button id="submitButton">確認</button>
       <div id="airtable-data"></div>

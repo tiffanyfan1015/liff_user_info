@@ -11,7 +11,7 @@ liff
     const displayName = profile.displayName;
     const pictureUrl = profile.pictureUrl;
 
-    document.getElementById('display-name').innerText = `Hi! ${displayName}`;
+    document.getElementById('display-name').innerText = displayName;
     document.getElementById('profile-picture').src = pictureUrl;
 
     const apiKey = 'pathKg8vFtCZFQo59.a03c24ccd56fea312a07bfdd8ea5c958b4a5cc02e3e0d622345076ec54e522a3';
