@@ -28,13 +28,13 @@ liff
       const weight = parseFloat(document.getElementById('weight').value);
       const hobbies = document.getElementById('hobbies').value;
 
-      const PersonalInformationObject = {
+      const personalInformationObject = {
         height: height.toString(),
         weight: height.toString(),
         hobby: hobbies
       };
 
-      const PersonalInformationString = JSON.stringify(PersonalInformationObject);
+      const personalInformationString = JSON.stringify(personalInformationObject);
       
       // 將輸入的數據顯示在網頁上
       document.getElementById('airtable-data').innerHTML = `
@@ -60,7 +60,7 @@ liff
               fields: {
                 lineUserId: userId,
                 name: displayName,
-                PersonalInformation: PersonalInformationString,
+                personalInformation: personalInformationString,
               }
             }
           ]
