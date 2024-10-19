@@ -13,7 +13,7 @@ liff
 
     // 更新用戶信息在網頁上
     document.getElementById('liff-status').innerText = 'LIFF init succeeded.';
-    document.getElementById('user-id').innerText = `Hi! ${userId}`;
+    document.getElementById('user-id').innerText = `User ID: ${userId}`;
     document.getElementById('display-name').innerText = `Display Name: ${displayName}`;
     document.getElementById('profile-picture').src = pictureUrl;
 
@@ -28,13 +28,13 @@ liff
       const weight = parseFloat(document.getElementById('weight').value);
       const hobbies = document.getElementById('hobbies').value;
 
-      const personalInformationObject = {
+      const PersonalInformationObject = {
         height: height.toString(),
         weight: height.toString(),
         hobby: hobbies
       };
 
-      const personalInformationString = JSON.stringify(personalInformationObject);
+      const PersonalInformationString = JSON.stringify(PersonalInformationObject);
       
       // 將輸入的數據顯示在網頁上
       document.getElementById('airtable-data').innerHTML = `
@@ -60,7 +60,7 @@ liff
               fields: {
                 lineUserId: userId,
                 name: displayName,
-                personalInformation: personalInformationString,
+                PersonalInformation: PersonalInformationString,
               }
             }
           ]
@@ -77,11 +77,11 @@ liff
         });
 
         document.getElementById('airtable-data').innerHTML = `
-          <p>資料已成功更新！</p>
-          // <p>Created Records: ${data.createdRecords ? JSON.stringify(data.createdRecords) : 'N/A'}</p>
-          // <p>Updated Records: ${data.updatedRecords ? JSON.stringify(data.updatedRecords) : 'N/A'}</p>
-          // <h3>記錄詳情：</h3>
-          // ${recordText}
+          <p>資料已成功更新至 Airtable。</p>
+          <p>Created Records: ${data.createdRecords ? JSON.stringify(data.createdRecords) : 'N/A'}</p>
+          <p>Updated Records: ${data.updatedRecords ? JSON.stringify(data.updatedRecords) : 'N/A'}</p>
+          <h3>記錄詳情：</h3>
+          ${recordText}
         `;
       })
       .catch(error => {
