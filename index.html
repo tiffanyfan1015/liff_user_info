@@ -5,6 +5,7 @@
     <link rel="icon" type="image/svg+xml" href="favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>建立個人資料</title>
+    <link rel="stylesheet" href="style.css">
   </head>
   <body>
     <div id="app">
@@ -20,14 +21,38 @@
 
       <!-- 表單讓使用者輸入資料 -->
       <!-- <h2>填寫資料：</h2> -->
+      <label for="user_name">稱呼:</label><br>
+      <input type="text" id="user_name" name="user_name"><br><br>
+
       <label for="height">身高 (cm):</label><br>
       <input type="text" id="height" name="height"><br><br>
 
       <label for="weight">體重 (kg):</label><br>
       <input type="text" id="weight" name="weight"><br><br>
 
-      <label for="hobbies">興趣:</label><br>
-      <input type="text" id="hobbies" name="hobbies"><br><br>
+      <lable for="intake">食量:</lable>
+      <br>
+      <select id="intake" name="intake" onchange="">
+        <option value="小">小</option>
+        <option value="中">中</option>
+        <option value="大">大</option>
+      </select>
+      <br><br>
+
+      <lable for="vegan">葷素:</lable>
+      <br>
+      <select id="vegan" name="vegan" onchange="">
+        <option value="葷食">葷食</option>
+        <option value="蛋奶素">蛋奶素</option>
+        <option value="全素">全素</option>
+      </select>
+      <br><br>
+
+      <label for="goal">目標:</label><br>
+      <input type="text" id="goal" name="goal"><br><br>
+
+      <label for="others">其他:</label><br>
+      <input type="text" id="others" name="others"><br><br>
 
       <button id="submitButton">確認</button>
       <div id="airtable-data"></div>

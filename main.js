@@ -21,17 +21,27 @@ liff
     const baseId = 'appmVhpvlM12J2ySD';
     const tableName = 'tblsBuEtURTFMZrJm'; 
 
+    document.getElementById('user_name').value = displayName;
+
     // 綁定確認按鈕的點擊事件
     document.getElementById('submitButton').addEventListener('click', () => {
       // 取得使用者輸入的身高、體重、興趣
+      const user_name = document.getElementById(('user_name').value);
       const height = parseFloat(document.getElementById('height').value);
       const weight = parseFloat(document.getElementById('weight').value);
-      const hobbies = document.getElementById('hobbies').value;
+      const intake = document.getElementById('intake').value;
+      const vegan = document.getElementById('vagan').value;
+      const goal = document.getElementById(('goal').value);
+      const others = document.getElementById(('others').value);
 
       const personalInformationObject = {
+        user_name: user_name,
         height: height.toString(),
         weight: height.toString(),
-        hobby: hobbies
+        intake: intake,
+        vegan: vegan,
+        goal: goal,
+        others: others,
       };
 
       const personalInformationString = JSON.stringify(personalInformationObject);
@@ -39,9 +49,13 @@ liff
       // 將輸入的數據顯示在網頁上
       document.getElementById('airtable-data').innerHTML = `
       <p>你輸入的資料如下：</p>
+      <p>稱呼：${user_name}</p>
       <p>身高: ${height} cm</p>
       <p>體重: ${weight} kg</p>
-      <p>興趣: ${hobbies}</p>
+      <p>食量: ${intake}</p>
+      <p>葷素: ${vegan}</p>
+      <p>目標: ${goal}</p>
+      <p>其他: ${others}</p>
       `;
 
       // 使用performUpsert來自動合併或新增記錄
