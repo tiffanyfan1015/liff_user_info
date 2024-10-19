@@ -12,9 +12,9 @@ liff
     const pictureUrl = profile.pictureUrl;
 
     // 更新用戶信息在網頁上
-    document.getElementById('liff-status').innerText = 'LIFF init succeeded.';
-    document.getElementById('user-id').innerText = `User ID: ${userId}`;
-    document.getElementById('display-name').innerText = `Display Name: ${displayName}`;
+    // document.getElementById('liff-status').innerText = 'LIFF init succeeded.';
+    // document.getElementById('user-id').innerText = `User ID: ${userId}`;
+    document.getElementById('display-name').innerText = `Hi! ${displayName}`;
     document.getElementById('profile-picture').src = pictureUrl;
 
     const apiKey = 'pathKg8vFtCZFQo59.a03c24ccd56fea312a07bfdd8ea5c958b4a5cc02e3e0d622345076ec54e522a3';
