@@ -44,8 +44,8 @@ liff
     // 綁定確認按鈕的點擊事件
     document.getElementById('submitButton').addEventListener('click', () => {
       // 取得使用者輸入的身高、體重、興趣
-      const height = document.getElementById('height').value;
-      const weight = document.getElementById('weight').value;
+      const height = parseFloat(document.getElementById('height').value);
+      const weight = parseFloat(document.getElementById('weight').value);
       const hobbies = document.getElementById('hobbies').value;
       
       // 將輸入的數據顯示在網頁上
