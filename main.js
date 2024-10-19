@@ -69,8 +69,8 @@ liff
             },
             body: JSON.stringify({
               fields: {
-                height: `${height} cm`,
-                weight: `${weight} kg`,
+                height: height,
+                weight: weight,
                 hobbies: hobbies,
               }
             }),
