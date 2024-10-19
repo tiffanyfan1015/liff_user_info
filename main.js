@@ -21,7 +21,19 @@ liff
       <a href="https://developers.line.biz/ja/docs/liff/" target="_blank" rel="noreferrer">
         LIFF Documentation
       </a>
-      <h2>Airtable Data:</h2>
+
+      <!-- 表單讓使用者輸入資料 -->
+      <h2>填寫資料：</h2>
+      <label for="height">身高 (cm):</label><br>
+      <input type="text" id="height" name="height"><br><br>
+
+      <label for="weight">體重 (kg):</label><br>
+      <input type="text" id="weight" name="weight"><br><br>
+
+      <label for="hobbies">興趣:</label><br>
+      <input type="text" id="hobbies" name="hobbies"><br><br>
+
+      <button id="submitButton">確認</button>
       <div id="airtable-data"></div>
     `;
 
@@ -29,64 +41,73 @@ liff
     const baseId = 'appmVhpvlM12J2ySD';
     const tableName = 'tblsBuEtURTFMZrJm'; 
 
-    // 先發送 GET 請求，檢查是否已經存在該 userId
-    fetch(`https://api.airtable.com/v0/${baseId}/${tableName}?filterByFormula={lineUserId}='${userId}'`, {
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-      },
-    })
-    .then(response => response.json())
-    .then(data => {
-      if (data.records.length > 0) {
-        // 如果找到 userId，則顯示訊息，不新增記錄
-        console.log(`User ID ${userId} 已經存在於 Airtable 中。`);
-        document.getElementById('airtable-data').innerHTML = `
-          <p>User ID ${userId} 已經存在於 Airtable 中，不會新增記錄。</p>
-        `;
-      } else {
-        // 如果沒找到 userId，則新增記錄
-        console.log(`User ID ${userId} 不存在，新增記錄中...`);
-        return fetch(`https://api.airtable.com/v0/${baseId}/${tableName}`, {
-          method: 'POST',
-          headers: {
-            Authorization: `Bearer ${apiKey}`,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            fields: {
-              name: displayName,
-              lineUserId: userId,
-              information: "hello, world",
-            }
-          }),
-        })
-        .then(response => response.json())
-        .then(data => {
-          console.log('Airtable record created:', data);
-          return fetch(`https://api.airtable.com/v0/${baseId}/${tableName}`, {
+    // 綁定確認按鈕的點擊事件
+    document.getElementById('submitButton').addEventListener('click', () => {
+      // 取得使用者輸入的身高、體重、興趣
+      const height = document.getElementById('height').value;
+      const weight = document.getElementById('weight').value;
+      const hobbies = document.getElementById('hobbies').value;
+
+      // 檢查是否已經存在該 userId
+      fetch(`https://api.airtable.com/v0/${baseId}/${tableName}?filterByFormula={lineUserId}='${userId}'`, {
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+        },
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.records.length > 0) {
+          // 如果找到 userId，則更新該記錄
+          const recordId = data.records[0].id;
+          console.log(`Updating record with ID ${recordId}`);
+
+          return fetch(`https://api.airtable.com/v0/${baseId}/${tableName}/${recordId}`, {
+            method: 'PATCH', // 使用 PATCH 方法更新記錄
             headers: {
               Authorization: `Bearer ${apiKey}`,
+              'Content-Type': 'application/json',
             },
+            body: JSON.stringify({
+              fields: {
+                height: `${height} cm`,
+                weight: `${weight} kg`,
+                hobbies: hobbies,
+              }
+            }),
           });
-        })
-        .then(response => response.json())
-        .then(data => {
-          const records = data.records;
-          let airtableHTML = '<table border="1"><tr><th>Record ID</th><th>Field Data</th></tr>';
-
-          // 將每一筆記錄顯示在表格中
-          records.forEach(record => {
-            airtableHTML += `<tr><td>${record.id}</td><td>${JSON.stringify(record.fields)}</td></tr>`;
+        } else {
+          // 如果沒找到 userId，則創建新記錄
+          console.log('User ID 不存在，新增記錄中...');
+          return fetch(`https://api.airtable.com/v0/${baseId}/${tableName}`, {
+            method: 'POST',
+            headers: {
+              Authorization: `Bearer ${apiKey}`,
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              fields: {
+                name: displayName,
+                lineUserId: userId,
+                height: `${height} cm`,
+                weight: `${weight} kg`,
+                hobbies: hobbies,
+              }
+            }),
           });
-
-          airtableHTML += '</table>';
-          document.getElementById('airtable-data').innerHTML = airtableHTML;
-        });
-      }
-    })
-    .catch(error => {
-      console.error('Error:', error);
-      document.getElementById('airtable-data').innerHTML = `<p>Error: ${error}</p>`;
+        }
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Airtable response:', data);
+        document.getElementById('airtable-data').innerHTML = `
+          <p>資料已成功更新至 Airtable。</p>
+          <p>Record ID: ${data.id}</p>
+        `;
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        document.getElementById('airtable-data').innerHTML = `<p>Error: ${error}</p>`;
+      });
     });
 
   })
