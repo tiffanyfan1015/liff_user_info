@@ -26,13 +26,13 @@ liff
     // 綁定確認按鈕的點擊事件
     document.getElementById('submitButton').addEventListener('click', () => {
       // 取得使用者輸入的身高、體重、興趣
-      const user_name = document.getElementById(('user_name').value);
+      const user_name = document.getElementById('user_name').value;
       const height = parseFloat(document.getElementById('height').value);
       const weight = parseFloat(document.getElementById('weight').value);
       const intake = document.getElementById('intake').value;
       const vegan = document.getElementById('vagan').value;
-      const goal = document.getElementById(('goal').value);
-      const others = document.getElementById(('others').value);
+      const goal = document.getElementById('goal').value;
+      const others = document.getElementById('others').value;
 
       const personalInformationObject = {
         user_name: user_name,
