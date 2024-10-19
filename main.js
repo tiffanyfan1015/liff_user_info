@@ -64,8 +64,8 @@ liff
               fields: {
                 lineUserId: userId,
                 name: displayName,
-                height: height,
-                weight: weight,
+                height: `${height} cm`,
+                weight: `${weight} kg`,
                 hobbies: hobbies,
               }
             }
@@ -74,11 +74,20 @@ liff
       })
       .then(response => response.json())
       .then(data => {
-        console.log('Airtable response:', data);
+        console.log('Airtable full response:', data);  // 顯示完整的 API 回應
+
+        const records = data.records || [];
+        let recordText = '';
+        records.forEach(record => {
+          recordText += `<p>Record ID: ${record.id}, Fields: ${JSON.stringify(record.fields)}</p>`;
+        });
+
         document.getElementById('airtable-data').innerHTML = `
           <p>資料已成功更新至 Airtable。</p>
           <p>Created Records: ${data.createdRecords ? JSON.stringify(data.createdRecords) : 'N/A'}</p>
           <p>Updated Records: ${data.updatedRecords ? JSON.stringify(data.updatedRecords) : 'N/A'}</p>
+          <h3>記錄詳情：</h3>
+          ${recordText}
         `;
       })
       .catch(error => {
