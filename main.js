@@ -78,10 +78,6 @@ liff
 
         document.getElementById('airtable-data').innerHTML = `
           <p>資料已成功更新！</p>
-          // <p>Created Records: ${data.createdRecords ? JSON.stringify(data.createdRecords) : 'N/A'}</p>
-          // <p>Updated Records: ${data.updatedRecords ? JSON.stringify(data.updatedRecords) : 'N/A'}</p>
-          // <h3>記錄詳情：</h3>
-          // ${recordText}
         `;
       })
       .catch(error => {
