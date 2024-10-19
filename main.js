@@ -47,6 +47,14 @@ liff
       const height = document.getElementById('height').value;
       const weight = document.getElementById('weight').value;
       const hobbies = document.getElementById('hobbies').value;
+      
+      // 將輸入的數據顯示在網頁上
+      document.getElementById('airtable-data').innerHTML = `
+      <p>你輸入的資料如下：</p>
+      <p>身高: ${height} cm</p>
+      <p>體重: ${weight} kg</p>
+      <p>興趣: ${hobbies}</p>
+      `;
 
       // 使用performUpsert來自動合併或新增記錄
       fetch(`https://api.airtable.com/v0/${baseId}/${tableName}`, {
