@@ -56,6 +56,7 @@ liff
 
   })
   .catch((error) => {
+    // LIFF 初始化失敗，顯示錯誤訊息
     document.querySelector('#app').innerHTML = `
       <h1>LIFF App</h1>
       <p>LIFF init failed.</p>
