@@ -89,8 +89,8 @@ button:hover {
 .card {
   background-color: white;
   color: #333;
-  border-radius: 10px; /* 減少卡片的圓角 */
-  padding: 15px; /* 減少卡片內邊距 */
+  border-radius: 15px; /* 減少卡片的圓角 */
+  padding: 10px; /* 減少卡片內邊距 */
   margin-bottom: 10px; /* 減少卡片之間的距離 */
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* 微妙陰影效果 */
   transition: transform 0.2s ease;
