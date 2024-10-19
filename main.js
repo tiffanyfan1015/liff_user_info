@@ -11,9 +11,6 @@ liff
     const displayName = profile.displayName;
     const pictureUrl = profile.pictureUrl;
 
-    // 更新用戶信息在網頁上
-    // document.getElementById('liff-status').innerText = 'LIFF init succeeded.';
-    // document.getElementById('user-id').innerText = `User ID: ${userId}`;
     document.getElementById('display-name').innerText = `Hi! ${displayName}`;
     document.getElementById('profile-picture').src = pictureUrl;
 
@@ -21,11 +18,40 @@ liff
     const baseId = 'appmVhpvlM12J2ySD';
     const tableName = 'tblsBuEtURTFMZrJm'; 
 
-    document.getElementById('user_name').value = displayName;
+    // 檢查是否已有資料
+    fetch(`https://api.airtable.com/v0/${baseId}/${tableName}?filterByFormula={lineUserId}='${userId}'`, {
+      headers: {
+        Authorization: `Bearer ${apiKey}`
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+      const records = data.records;
+      if (records.length > 0) {
+        const userData = records[0].fields.personalInformation;
+        const parsedData = JSON.parse(userData);
 
-    // 綁定確認按鈕的點擊事件
+        // 將現有資料填入輸入框
+        document.getElementById('user_name').value = parsedData.user_name || displayName;
+        document.getElementById('height').value = parsedData.height || '';
+        document.getElementById('weight').value = parsedData.weight || '';
+        document.getElementById('intake').value = parsedData.intake || '中';
+        document.getElementById('vegan').value = parsedData.vegan || '葷食';
+        document.getElementById('goal').value = parsedData.goal || '';
+        document.getElementById('others').value = parsedData.others || '';
+      } else {
+        // 沒有現有記錄，使用者必須第一次輸入資料
+        document.getElementById('user_name').value = displayName;
+      }
+    })
+    .catch(error => {
+      console.error('Error fetching data from Airtable:', error);
+    });
+
     document.getElementById('submitButton').addEventListener('click', () => {
-      // 取得使用者輸入的身高、體重、興趣
+      console.log('Button clicked!');
+
+      // get user input
       const user_name = document.getElementById('user_name').value;
       const height = parseFloat(document.getElementById('height').value);
       const weight = parseFloat(document.getElementById('weight').value);
@@ -33,6 +59,8 @@ liff
       const vegan = document.getElementById('vegan').value;
       const goal = document.getElementById('goal').value;
       const others = document.getElementById('others').value;
+
+      console.log({ user_name, height, weight, intake, vegan, goal, others });
 
       const personalInformationObject = {
         user_name: user_name,
@@ -45,20 +73,7 @@ liff
       };
 
       const personalInformationString = JSON.stringify(personalInformationObject);
-      
-      // 將輸入的數據顯示在網頁上
-      document.getElementById('airtable-data').innerHTML = `
-      <p>你輸入的資料如下：</p>
-      <p>稱呼：${user_name}</p>
-      <p>身高: ${height} cm</p>
-      <p>體重: ${weight} kg</p>
-      <p>食量: ${intake}</p>
-      <p>葷素: ${vegan}</p>
-      <p>目標: ${goal}</p>
-      <p>其他: ${others}</p>
-      `;
 
-      // 使用performUpsert來自動合併或新增記錄
       fetch(`https://api.airtable.com/v0/${baseId}/${tableName}`, {
         method: 'PATCH',
         headers: {
@@ -67,7 +82,7 @@ liff
         },
         body: JSON.stringify({
           performUpsert: {
-            fieldsToMergeOn: ["lineUserId"] // 指定用 lineUserId 作為唯一識別符號
+            fieldsToMergeOn: ["lineUserId"]
           },
           records: [
             {
@@ -80,16 +95,14 @@ liff
           ]
         }),
       })
-      .then(response => response.json())
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
       .then(data => {
-        console.log('Airtable full response:', data);  // 顯示完整的 API 回應
-
-        const records = data.records || [];
-        let recordText = '';
-        records.forEach(record => {
-          recordText += `<p>Record ID: ${record.id}, Fields: ${JSON.stringify(record.fields)}</p>`;
-        });
-
+        console.log('Airtable full response:', data); 
         document.getElementById('airtable-data').innerHTML = `
           <p>資料已成功更新！</p>
         `;
@@ -102,6 +115,5 @@ liff
 
   })
   .catch((error) => {
-    document.getElementById('liff-status').innerText = 'LIFF init failed.';
     console.error('LIFF initialization failed:', error);
   });
